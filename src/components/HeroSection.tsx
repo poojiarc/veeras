@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import venueAerial from "@/assets/venue-aerial2.jpg";
 import hallInterior from "@/assets/hall-interior.jpg";
@@ -12,6 +13,7 @@ const slides = [
 
 const HeroSection = () => {
   const [current, setCurrent] = useState(0);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const timer = setInterval(() => setCurrent((p) => (p + 1) % slides.length), 5000);
@@ -53,7 +55,7 @@ const HeroSection = () => {
           A perfect destination for hosting memorable events and celebrations
         </p>
         <button
-          onClick={() => document.querySelector("#book")?.scrollIntoView({ behavior: "smooth" })}
+          onClick={() => navigate("/booking")}
           className="gold-gradient px-10 py-4 rounded-full text-primary-foreground font-semibold text-lg tracking-wide hover:opacity-90 transition-all gold-glow hover:scale-105 duration-300"
         >
           Reserve Your Date

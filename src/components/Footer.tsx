@@ -1,11 +1,9 @@
+import { useNavigate } from "react-router-dom";
 import logo from "@/assets/logo.jpeg";
 import { Home, Info, Sparkles, Phone, Heart, MapPin, Mail } from "lucide-react";
 
 const Footer = () => {
-  const handleNavClick = (href: string) => {
-    const el = document.querySelector(href);
-    el?.scrollIntoView({ behavior: "smooth" });
-  };
+  const navigate = useNavigate();
 
   return (
     <footer className="border-t border-border bg-muted/20">
@@ -13,7 +11,13 @@ const Footer = () => {
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-10">
           {/* Logo & Caption */}
           <div>
-            <img src={logo} alt="Veera Chandramma Function Hall" className="h-16 w-auto rounded mb-4" />
+            <div className="flex items-center gap-3 mb-4">
+              <img src={logo} alt="Veera Chandramma Function Hall" className="h-16 w-auto rounded" />
+              <div>
+                <h3 className="font-heading text-base font-bold gold-text leading-tight">Veera Chandramma</h3>
+                <p className="text-[10px] tracking-[0.2em] uppercase text-foreground/60">Function Hall</p>
+              </div>
+            </div>
             <p className="font-accent text-foreground/70 italic leading-relaxed">
               "Creating unforgettable celebrations with elegance and tradition."
             </p>
@@ -24,14 +28,14 @@ const Footer = () => {
             <h4 className="font-heading text-lg font-semibold text-primary mb-4">Quick Links</h4>
             <ul className="space-y-3">
               {[
-                { href: "#home", label: "Home", icon: Home },
-                { href: "#about", label: "About", icon: Info },
-                { href: "#highlights", label: "Venue Highlights", icon: Sparkles },
-                { href: "#contact", label: "Plan With Us", icon: Phone },
+                { href: "/", label: "Home", icon: Home },
+                { href: "/about", label: "About", icon: Info },
+                { href: "/venue-highlights", label: "Venue Highlights", icon: Sparkles },
+                { href: "/contact", label: "Plan With Us", icon: Phone },
               ].map((link) => (
                 <li key={link.href}>
                   <button
-                    onClick={() => handleNavClick(link.href)}
+                    onClick={() => navigate(link.href)}
                     className="flex items-center gap-2 text-foreground/70 hover:text-primary transition-colors text-sm"
                   >
                     <link.icon className="w-4 h-4" />
