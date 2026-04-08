@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import {
   Heart, Cake, PartyPopper, Baby, Briefcase, Music, Users,
-  UtensilsCrossed, ShowerHead, BedDouble, ChevronRight
+  UtensilsCrossed, ShowerHead, BedDouble, ChevronRight, Star
 } from "lucide-react";
 import hallSeating from "@/assets/hall-seating.jpg";
 import roomAc from "@/assets/room-ac.jpg";
@@ -31,17 +31,17 @@ const clickableFacilities = [
     path: "/function-hall",
   },
   {
-    title: "Washrooms",
-    icon: ShowerHead,
-    items: ["8 common washrooms", "24/7 water supply"],
-    path: "/washrooms",
-  },
-  {
     title: "Room Facilities",
     icon: BedDouble,
     items: ["Total 11 rooms (AC & Non-AC)", "AC single bedroom (attached bathroom)", "AC double bedroom", "24/7 water facility"],
     path: "/room-facilities",
     highlight: true,
+  },
+  {
+    title: "Washrooms",
+    icon: ShowerHead,
+    items: ["8 common washrooms", "24/7 water supply"],
+    path: "/washrooms",
   },
 ];
 
@@ -92,7 +92,7 @@ const ImageScroller = () => {
   return (
     <div ref={ref} className={`mb-20 transition-all duration-700 ${isVisible ? "animate-fade-in-up" : "opacity-0"}`}>
       <div className="overflow-hidden">
-        <div className="flex gap-4 animate-scroll-x">
+        <div className="flex gap-4 animate-scroll-x-fast">
           {[...scrollImages, ...scrollImages].map((img, i) => (
             <div key={i} className="flex-shrink-0 w-64 md:w-80 h-48 md:h-56 overflow-hidden rounded-xl gold-border-glow">
               <img src={img.src} alt={img.alt} className="w-full h-full object-cover hover:scale-110 transition-transform duration-500" loading="lazy" />
@@ -136,18 +136,24 @@ const FacilitiesGrid = () => {
         🏢 Our Facilities
       </h3>
       <div className="grid md:grid-cols-2 gap-6">
-        {/* Clickable facility cards */}
         {clickableFacilities.map((f, i) => (
           <div
             key={i}
             onClick={() => navigate(f.path)}
             className={`glass-card glass-card-hover rounded-2xl p-8 transition-all duration-300 cursor-pointer hover:-translate-y-1 group ${
-              f.highlight ? "gold-border-glow" : ""
+              f.highlight ? "gold-border-glow ring-1 ring-primary/30 relative overflow-hidden" : ""
             }`}
           >
+            {f.highlight && (
+              <div className="absolute top-0 right-0 gold-gradient px-4 py-1 rounded-bl-xl">
+                <span className="flex items-center gap-1 text-primary-foreground text-xs font-bold">
+                  <Star className="w-3 h-3" /> Featured
+                </span>
+              </div>
+            )}
             <div className="flex items-center justify-between mb-5">
               <div className="flex items-center gap-3">
-                <div className="p-3 rounded-xl bg-primary/10">
+                <div className={`p-3 rounded-xl ${f.highlight ? "bg-primary/20" : "bg-primary/10"}`}>
                   <f.icon className="w-6 h-6 text-primary" />
                 </div>
                 <h4 className="font-heading text-xl font-semibold text-foreground">
@@ -165,7 +171,9 @@ const FacilitiesGrid = () => {
                 </li>
               ))}
             </ul>
-            <p className="text-primary text-xs mt-4 font-medium group-hover:underline">View details →</p>
+            <p className={`text-xs mt-4 font-medium group-hover:underline ${f.highlight ? "text-primary font-bold" : "text-primary"}`}>
+              {f.highlight ? "Explore our rooms →" : "View details →"}
+            </p>
           </div>
         ))}
 

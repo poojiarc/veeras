@@ -5,6 +5,7 @@ import { format } from "date-fns";
 
 const services = [
   "Wedding",
+  "Rooms",
   "Birthday Party",
   "Engagement",
   "Anniversary",
