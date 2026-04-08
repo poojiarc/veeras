@@ -44,7 +44,7 @@ const Navbar = () => {
           <img src={logo} alt="Veera Chandramma Function Hall" className="h-12 w-auto rounded" />
           <div className="hidden sm:block">
             <h1 className="font-heading text-lg font-bold gold-text leading-tight">Veera Chandramma</h1>
-            <p className="text-[10px] tracking-[0.2em] uppercase text-foreground/60 font-medium">Function Hall</p>
+            <p className="text-[10px] tracking-[0.2em] uppercase text-foreground/60 font-medium">Function Hall & Rooms</p>
           </div>
         </a>
 

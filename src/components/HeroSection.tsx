@@ -1,84 +1,106 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { ChevronLeft, ChevronRight } from "lucide-react";
 import venueAerial from "@/assets/venue-aerial2.jpg";
 import hallInterior from "@/assets/hall-interior.jpg";
 import stageDecor from "@/assets/stage-decor2.jpg";
 
 const slides = [
-  { image: venueAerial, alt: "Aerial view of Veera Chandramma Function Hall" },
+  { image: venueAerial, alt: "Aerial view of Veera Chandramma Function Hall and Rooms" },
   { image: hallInterior, alt: "Grand hall interior with seating" },
   { image: stageDecor, alt: "Beautiful stage decoration" },
 ];
 
 const HeroSection = () => {
   const [current, setCurrent] = useState(0);
+  const [direction, setDirection] = useState<"enter" | "exit">("enter");
   const navigate = useNavigate();
 
   useEffect(() => {
-    const timer = setInterval(() => setCurrent((p) => (p + 1) % slides.length), 5000);
+    const timer = setInterval(() => {
+      setDirection("exit");
+      setTimeout(() => {
+        setCurrent((p) => (p + 1) % slides.length);
+        setDirection("enter");
+      }, 600);
+    }, 5000);
     return () => clearInterval(timer);
   }, []);
 
-  const prev = () => setCurrent((p) => (p - 1 + slides.length) % slides.length);
-  const next = () => setCurrent((p) => (p + 1) % slides.length);
-
   return (
-    <section id="home" className="relative h-screen overflow-hidden">
-      {slides.map((slide, i) => (
-        <div
-          key={i}
-          className={`absolute inset-0 transition-opacity duration-1000 ${
-            i === current ? "opacity-100" : "opacity-0"
-          }`}
-        >
-          <img
-            src={slide.image}
-            alt={slide.alt}
-            className="w-full h-full object-cover"
-            loading={i === 0 ? "eager" : "lazy"}
-          />
-          <div className="absolute inset-0 bg-gradient-to-b from-background/70 via-background/50 to-background/90" />
+    <section id="home" className="relative min-h-screen overflow-hidden bg-background">
+      {/* Background subtle gradient */}
+      <div className="absolute inset-0 bg-gradient-to-br from-background via-background to-muted/30" />
+
+      <div className="relative z-10 container mx-auto h-screen flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-12 px-4 pt-20 lg:pt-0">
+        {/* Left side - Text content */}
+        <div className="flex-1 flex flex-col justify-center text-center lg:text-left max-w-xl lg:max-w-lg xl:max-w-xl">
+          <p className="font-accent text-primary tracking-[0.3em] uppercase text-xs md:text-sm mb-4 animate-fade-in">
+            Welcome to
+          </p>
+          <h1 className="font-heading text-3xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
+            <span className="gold-text">Veera Chandramma</span>
+            <br />
+            <span className="text-foreground">Function Hall</span>
+            <br />
+            <span className="text-foreground text-2xl md:text-4xl lg:text-5xl">&amp; Rooms</span>
+          </h1>
+          <p className="font-accent text-muted-foreground text-base md:text-lg max-w-md mb-8 italic mx-auto lg:mx-0">
+            Where Grand Celebrations Meet Timeless Tradition
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+            <button
+              onClick={() => navigate("/booking")}
+              className="gold-gradient px-8 py-3.5 rounded-full text-primary-foreground font-semibold text-base tracking-wide hover:opacity-90 transition-all gold-glow hover:scale-105 duration-300"
+            >
+              Reserve Your Date
+            </button>
+            <button
+              onClick={() => navigate("/contact")}
+              className="border border-primary/50 text-primary px-8 py-3.5 rounded-full font-semibold text-base tracking-wide hover:bg-primary/10 transition-all duration-300"
+            >
+              Plan With Us
+            </button>
+          </div>
         </div>
-      ))}
 
-      <div className="relative z-10 h-full flex flex-col items-center justify-center text-center px-4">
-        <p className="font-accent text-primary tracking-[0.3em] uppercase text-sm md:text-base mb-4 animate-fade-in">
-          Veera Chandramma Function Hall
-        </p>
-        <h1 className="font-heading text-4xl md:text-6xl lg:text-7xl font-bold mb-6 max-w-4xl leading-tight">
-          <span className="gold-text">Where Grand Celebrations</span>
-          <br />
-          <span className="text-foreground">Meet Timeless Tradition</span>
-        </h1>
-        <p className="font-accent text-muted-foreground text-lg md:text-xl max-w-2xl mb-10 italic">
-          A perfect destination for hosting memorable events and celebrations
-        </p>
-        <button
-          onClick={() => navigate("/booking")}
-          className="gold-gradient px-10 py-4 rounded-full text-primary-foreground font-semibold text-lg tracking-wide hover:opacity-90 transition-all gold-glow hover:scale-105 duration-300"
-        >
-          Reserve Your Date
-        </button>
-      </div>
-
-      <button onClick={prev} className="absolute left-4 top-1/2 -translate-y-1/2 z-20 glass-card p-3 rounded-full hover:bg-primary/20 transition-colors">
-        <ChevronLeft className="w-5 h-5 text-foreground" />
-      </button>
-      <button onClick={next} className="absolute right-4 top-1/2 -translate-y-1/2 z-20 glass-card p-3 rounded-full hover:bg-primary/20 transition-colors">
-        <ChevronRight className="w-5 h-5 text-foreground" />
-      </button>
-
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 flex gap-3">
-        {slides.map((_, i) => (
-          <button
-            key={i}
-            onClick={() => setCurrent(i)}
-            className={`w-3 h-3 rounded-full transition-all duration-300 ${
-              i === current ? "bg-primary w-8" : "bg-foreground/30"
-            }`}
-          />
-        ))}
+        {/* Right side - Image with reveal effects */}
+        <div className="flex-1 flex items-center justify-center w-full max-w-lg lg:max-w-xl xl:max-w-2xl">
+          <div className="relative w-full aspect-[4/3] rounded-2xl overflow-hidden gold-border-glow shadow-2xl">
+            {slides.map((slide, i) => (
+              <div
+                key={i}
+                className={`absolute inset-0 transition-all duration-700 ease-in-out ${
+                  i === current
+                    ? direction === "enter"
+                      ? "opacity-100 scale-100 translate-x-0"
+                      : "opacity-0 scale-105 -translate-x-4"
+                    : "opacity-0 scale-95 translate-x-8"
+                }`}
+              >
+                <img
+                  src={slide.image}
+                  alt={slide.alt}
+                  className="w-full h-full object-cover"
+                  loading={i === 0 ? "eager" : "lazy"}
+                />
+              </div>
+            ))}
+            {/* Overlay shimmer effect */}
+            <div className="absolute inset-0 bg-gradient-to-tr from-background/30 via-transparent to-primary/5 pointer-events-none" />
+            
+            {/* Slide indicators */}
+            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
+              {slides.map((_, i) => (
+                <span
+                  key={i}
+                  className={`block h-1.5 rounded-full transition-all duration-500 ${
+                    i === current ? "bg-primary w-6" : "bg-foreground/30 w-1.5"
+                  }`}
+                />
+              ))}
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   );
