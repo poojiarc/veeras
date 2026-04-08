@@ -5,10 +5,10 @@ import {
   UtensilsCrossed, ShowerHead, BedDouble, ChevronRight, Star
 } from "lucide-react";
 import hallSeating from "@/assets/hall-seating.jpg";
-import roomAc from "@/assets/room-ac.jpg";
+import roomAc from "@/assets/Hotel.jpeg";
 import hallInterior from "@/assets/hall-interior.jpg";
 import stageDecor from "@/assets/stage-decor.jpg";
-import stageDecor2 from "@/assets/stage-decor2.jpg";
+import stageDecor2 from "@/assets/venue-aerial.jpg";
 import entranceDecor from "@/assets/entrance-decor.jpg";
 import venueAerial from "@/assets/venue-aerial.jpg";
 import venueAerial2 from "@/assets/venue-aerial2.jpg";

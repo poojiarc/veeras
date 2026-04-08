@@ -3,8 +3,8 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import FloatingButtons from "@/components/FloatingButtons";
 import { ArrowLeft, ShowerHead } from "lucide-react";
-import bathroom from "@/assets/bathroom.jpg";
-import venueAerial3 from "@/assets/venue-aerial3.jpg";
+import bathroom from "@/assets/room-ac.jpg";
+import venueAerial3 from "@/assets/room-ac2.jpg";
 
 const WashroomsPage = () => {
   const navigate = useNavigate();

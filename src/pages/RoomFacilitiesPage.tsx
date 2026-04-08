@@ -3,8 +3,8 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import FloatingButtons from "@/components/FloatingButtons";
 import { ArrowLeft, BedDouble } from "lucide-react";
-import roomAc from "@/assets/room-ac.jpg";
-import roomAc2 from "@/assets/room-ac2.jpg";
+import roomAc from "@/assets/Hotel.jpeg";
+import roomAc2 from "@/assets/room-ac.jpeg";
 
 const RoomFacilitiesPage = () => {
   const navigate = useNavigate();
