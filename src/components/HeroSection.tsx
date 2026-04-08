@@ -3,11 +3,15 @@ import { useNavigate } from "react-router-dom";
 import venueAerial from "@/assets/venue-aerial2.jpg";
 import hallInterior from "@/assets/hall-interior.jpg";
 import stageDecor from "@/assets/stage-decor2.jpg";
+import venueAerial3 from "@/assets/venue-aerial3.jpg";
+import entranceDecor from "@/assets/entrance-decor.jpg";
 
 const slides = [
   { image: venueAerial, alt: "Aerial view of Veera Chandramma Function Hall and Rooms" },
   { image: hallInterior, alt: "Grand hall interior with seating" },
   { image: stageDecor, alt: "Beautiful stage decoration" },
+  { image: venueAerial3, alt: "Panoramic venue view" },
+  { image: entranceDecor, alt: "Elegant entrance decoration" },
 ];
 
 const HeroSection = () => {
